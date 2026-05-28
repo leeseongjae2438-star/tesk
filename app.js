@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 첫 사용자 인터랙션 시 AudioContext 사전 초기화 (브라우저 자동재생 차단 우회)
   document.body.addEventListener('click', initAudioContext, { once: true });
+  
+  // 윈도우 시스템 알림 권한 요청
+  requestNotificationPermission();
 });
 
 alarmForm.addEventListener('submit', (e) => {
@@ -204,6 +207,9 @@ function triggerAlarm(alarm) {
 
   // 벨소리 연주 시작
   playAlarmSound();
+
+  // 시스템 알림 노출
+  showNotification(alarm);
 }
 
 function dismissAlarm() {
@@ -268,5 +274,31 @@ function stopAlarmSound() {
   if (alarmInterval) {
     clearTimeout(alarmInterval);
     alarmInterval = null;
+  }
+}
+
+// -------------------------------------------------------------
+// System Notification (Windows Toast Notification)
+// -------------------------------------------------------------
+function requestNotificationPermission() {
+  if ('Notification' in window) {
+    if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+      Notification.requestPermission();
+    }
+  }
+}
+
+function showNotification(alarm) {
+  if ('Notification' in window && Notification.permission === 'granted') {
+    const notification = new Notification('NEO ALARM', {
+      body: `설정한 알람 시간입니다: ${alarm.time}${alarm.label ? ' (' + alarm.label + ')' : ''}`,
+      tag: 'neo-alarm-trigger',
+      requireInteraction: true // 사용자가 닫을 때까지 알림이 화면에 계속 유지되도록 설정
+    });
+
+    notification.onclick = () => {
+      window.focus();
+      dismissAlarm();
+    };
   }
 }
