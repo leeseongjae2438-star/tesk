@@ -1,0 +1,674 @@
+/* -------------------------------------------------------------
+ * Premium Theme Configuration & Variables
+ * ------------------------------------------------------------- */
+:root {
+  --bg-primary: #07050f;
+  --bg-secondary: #0d0a1b;
+  --glass-bg: rgba(20, 16, 38, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: rgba(0, 0, 0, 0.4);
+  
+  --color-text-primary: #f3f1f8;
+  --color-text-secondary: #a39cb5;
+  --color-accent-pink: #ec4899;
+  --color-accent-purple: #a855f7;
+  --color-accent-blue: #3b82f6;
+  --color-accent-cyan: #06b6d4;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+
+  --font-main: 'Outfit', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+  
+  --neon-glow-cyan: 0 0 15px rgba(6, 182, 212, 0.6);
+  --neon-glow-purple: 0 0 15px rgba(168, 85, 247, 0.6);
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* -------------------------------------------------------------
+ * Reset & Base Styles
+ * ------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-primary);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Background Animated Circles */
+.background-decorations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.35;
+  animation: float 20s infinite alternate ease-in-out;
+}
+
+.circle-1 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, var(--color-accent-purple) 0%, var(--color-accent-blue) 100%);
+  top: -100px;
+  right: -50px;
+  animation-delay: 0s;
+}
+
+.circle-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--color-accent-cyan) 0%, var(--color-accent-pink) 100%);
+  bottom: -150px;
+  left: -100px;
+  animation-delay: -5s;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(80px, 50px) scale(1.15);
+  }
+}
+
+/* -------------------------------------------------------------
+ * Glassmorphism Base Card
+ * ------------------------------------------------------------- */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px var(--glass-shadow);
+  padding: 30px;
+  transition: var(--transition-smooth);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* -------------------------------------------------------------
+ * Layout Structure
+ * ------------------------------------------------------------- */
+.app-container {
+  width: 100%;
+  max-width: 850px;
+  padding: 40px 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.logo {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+  background: linear-gradient(135deg, var(--color-accent-cyan) 0%, var(--color-accent-purple) 50%, var(--color-accent-pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  margin-bottom: 5px;
+  text-shadow: 0 0 30px rgba(168, 85, 247, 0.25);
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* -------------------------------------------------------------
+ * Clock Section (Visual Hero)
+ * ------------------------------------------------------------- */
+.clock-section {
+  width: 100%;
+}
+
+.clock-card {
+  position: relative;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(20, 16, 38, 0.6) 0%, rgba(10, 8, 22, 0.8) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.live-date {
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--color-accent-cyan);
+  text-shadow: var(--neon-glow-cyan);
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.live-time {
+  font-family: var(--font-mono);
+  font-size: 4.5rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #ffffff 30%, var(--color-text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 2px;
+  line-height: 1.1;
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+}
+
+/* Subtle background pulse animation in the clock */
+.pulse-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
+  animation: pulse 4s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+/* -------------------------------------------------------------
+ * Control & Grid Section
+ * ------------------------------------------------------------- */
+.control-section {
+  display: grid;
+  grid-template-columns: 1.1fr 1.3fr;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .control-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title span.material-icons-round {
+  color: var(--color-accent-purple);
+  font-size: 1.6rem;
+}
+
+/* Form Styling */
+.alarm-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.input-group input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: var(--color-text-primary);
+  font-family: var(--font-main);
+  font-size: 1rem;
+  transition: var(--transition-smooth);
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--color-accent-purple);
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
+}
+
+/* Input Type Time custom styling for dark mode */
+.input-group input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-accent-purple) 0%, var(--color-accent-pink) 100%);
+  border: none;
+  border-radius: 14px;
+  color: white;
+  padding: 14px;
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+  transition: var(--transition-smooth);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5);
+  background: linear-gradient(135deg, #b866ff 0%, #ff5aa9 100%);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* -------------------------------------------------------------
+ * Alarm List Area
+ * ------------------------------------------------------------- */
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.list-header .section-title {
+  margin-bottom: 0;
+}
+
+.badge {
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: var(--color-accent-purple);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.alarm-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 270px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+/* Custom Scrollbar for list container */
+.alarm-list-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.alarm-list-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.alarm-list-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.alarm-list-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 40px 10px;
+  color: var(--color-text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.empty-state span.material-icons-round {
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.1);
+}
+
+.empty-state p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+/* Alarm Card Item */
+.alarm-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  padding: 16px 20px;
+  transition: var(--transition-smooth);
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alarm-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.alarm-item.inactive {
+  opacity: 0.65;
+}
+
+.alarm-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.alarm-item-time {
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1;
+}
+
+.alarm-item-label {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  font-weight: 400;
+}
+
+.alarm-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Toggle Switch Styles */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.15);
+  transition: .3s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+input:checked + .slider {
+  background: linear-gradient(135deg, var(--color-accent-cyan) 0%, var(--color-accent-blue) 100%);
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* Delete Button */
+.btn-delete {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: var(--transition-smooth);
+}
+
+.btn-delete:hover {
+  color: var(--color-danger);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* -------------------------------------------------------------
+ * Alarm Triggered Fullscreen Overlay (Modal)
+ * ------------------------------------------------------------- */
+.alarm-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 3, 11, 0.9);
+  backdrop-filter: blur(25px);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.alarm-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+  animation: alarmPulseBg 2s infinite alternate;
+}
+
+@keyframes alarmPulseBg {
+  0% {
+    background: rgba(5, 3, 11, 0.9);
+  }
+  100% {
+    background: rgba(30, 5, 20, 0.92);
+  }
+}
+
+.alarm-modal {
+  background: rgba(25, 20, 45, 0.7);
+  border: 1px solid rgba(236, 72, 153, 0.3);
+  box-shadow: 0 0 50px rgba(236, 72, 153, 0.2), inset 0 0 20px rgba(236, 72, 153, 0.1);
+  border-radius: 32px;
+  width: 90%;
+  max-width: 440px;
+  padding: 40px;
+  text-align: center;
+  transform: scale(0.8);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.alarm-overlay.active .alarm-modal {
+  transform: scale(1);
+}
+
+.alarm-icon-wrapper {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-accent-pink) 0%, var(--color-accent-purple) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 24px;
+  box-shadow: 0 0 30px rgba(236, 72, 153, 0.5);
+}
+
+.alarm-icon-wrapper span {
+  font-size: 3.5rem;
+  color: white;
+}
+
+/* Bell shake animation */
+.alarm-bell-animation {
+  animation: ring 0.5s infinite;
+}
+
+@keyframes ring {
+  0% { transform: rotate(0); }
+  10% { transform: rotate(15deg); }
+  20% { transform: rotate(-15deg); }
+  30% { transform: rotate(10deg); }
+  40% { transform: rotate(-10deg); }
+  50% { transform: rotate(5deg); }
+  60% { transform: rotate(-5deg); }
+  70% { transform: rotate(0); }
+  100% { transform: rotate(0); }
+}
+
+.alarm-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  color: var(--color-text-primary);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.alarm-triggered-time {
+  font-family: var(--font-mono);
+  font-size: 3.5rem;
+  font-weight: 600;
+  color: var(--color-accent-pink);
+  text-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
+  margin-bottom: 12px;
+}
+
+.alarm-triggered-label {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-dismiss {
+  width: 100%;
+  max-width: 200px;
+  background: white;
+  color: var(--bg-primary);
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 16px;
+  padding: 16px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+  transition: var(--transition-smooth);
+}
+
+.btn-dismiss:hover {
+  background: #f0edf8;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.35);
+}
+
+.btn-dismiss:active {
+  transform: translateY(0);
+}
+
+/* -------------------------------------------------------------
+ * Footer Style
+ * ------------------------------------------------------------- */
+.app-footer {
+  text-align: center;
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+}

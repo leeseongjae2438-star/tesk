@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neo-Alarms | 프리미엄 웹 알람</title>
+  <meta name="description" content="세련된 글래스모피즘 디자인과 커스텀 신시사이저 사운드를 제공하는 프리미엄 웹 알람 시계입니다.">
+  <!-- Google Fonts 로드 (시크한 무드의 Outfit과 디지털 감성의 Share Tech Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <!-- Material Icons for Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-decorations">
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+  </div>
+
+  <main class="app-container">
+    <header class="app-header">
+      <h1 class="logo">NEO ALARM</h1>
+      <p class="subtitle">Time is the ultimate luxury</p>
+    </header>
+
+    <!-- 현재 시간 표시 영역 -->
+    <section class="clock-section" aria-label="현재 시간">
+      <div class="glass-card clock-card">
+        <div id="live-date" class="live-date">2026년 05월 28일 목요일</div>
+        <div id="live-time" class="live-time">12:34:56</div>
+        <div class="pulse-ring"></div>
+      </div>
+    </section>
+
+    <!-- 알람 컨트롤 섹션 -->
+    <section class="control-section" aria-label="알람 설정 및 목록">
+      <!-- 알람 추가 폼 -->
+      <div class="glass-card form-card">
+        <h2 class="section-title"><span class="material-icons-round">add_alarm</span> 새 알람 추가</h2>
+        <form id="alarm-form" class="alarm-form">
+          <div class="input-group">
+            <label for="alarm-time">시간 선택</label>
+            <input type="time" id="alarm-time" required>
+          </div>
+          <div class="input-group">
+            <label for="alarm-label">알람 이름 (선택)</label>
+            <input type="text" id="alarm-label" placeholder="예: 아침 운동, 회의 준비 등" maxlength="20">
+          </div>
+          <button type="submit" id="btn-add-alarm" class="btn-primary">
+            <span class="material-icons-round">playlist_add</span> 알람 등록
+          </button>
+        </form>
+      </div>
+
+      <!-- 알람 목록 -->
+      <div class="glass-card list-card">
+        <div class="list-header">
+          <h2 class="section-title"><span class="material-icons-round">alarm</span> 내 알람 목록</h2>
+          <span id="alarm-count" class="badge">0개 설정됨</span>
+        </div>
+        <div id="alarm-list-container" class="alarm-list-container">
+          <!-- 알람 아이템이 여기에 동적으로 렌더링됩니다. -->
+          <div class="empty-state">
+            <span class="material-icons-round">notifications_off</span>
+            <p>등록된 알람이 없습니다.<br>새 알람을 추가해 보세요.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 알람 울릴 때의 풀스크린 오버레이 모달 -->
+  <div id="alarm-trigger-overlay" class="alarm-overlay" role="dialog" aria-modal="true" aria-labelledby="triggered-title">
+    <div class="alarm-modal">
+      <div class="alarm-icon-wrapper">
+        <span class="material-icons-round alarm-bell-animation">notifications_active</span>
+      </div>
+      <h2 id="triggered-title" class="alarm-title">알람이 울리고 있습니다!</h2>
+      <p id="triggered-time" class="alarm-triggered-time">00:00</p>
+      <p id="triggered-label" class="alarm-triggered-label">알람 이름</p>
+      
+      <div class="modal-actions">
+        <button id="btn-dismiss-alarm" class="btn-dismiss">알람 끄기</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <p>&copy; 2026 Neo Alarm. Designed for premium productivity.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
